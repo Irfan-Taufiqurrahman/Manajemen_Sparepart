@@ -9,8 +9,8 @@ class PelaksanaMiddleware
 {
     public function handle($request, Closure $next)
     {
-        // dd($request->user()->role);
-        if ($request->user() && $request->user()->role !== 'pengawas') {
+
+        if ($request->user() && strtolower($request->user()->role->name) !== User::ROLE_PELAKSANA) {
             return response('Unauthorized', 401);
         }
 

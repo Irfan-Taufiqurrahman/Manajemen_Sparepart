@@ -9,7 +9,7 @@ class AdminMiddleware
 {
     public function handle($request, Closure $next)
     {
-        if ($request->user() && $request->user()->role !== User::ROLE_ADMIN) {
+        if ($request->user() && strtolower($request->user()->role->name) !== User::ROLE_ADMIN) {
             return response('Unauthorized', 401);
         }
 

@@ -13,11 +13,11 @@
                         <h1 class="mb-4 text-xl font-semibold text-gray-700 dark:text-gray-200">
                             Create account
                         </h1>
-                        <form action="#" method="POST">
+                        <form action="{{ route('auth.register') }}" method="POST">
                             @csrf
                             <label class="block text-sm">
                                 <span class="text-gray-700 dark:text-gray-400">Nomor Handphone</span>
-                                <input name="number_handphone" id="number_handphone" class="block w-full mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray form-input" placeholder="08***" type="number" required />
+                                <input name="number_phone" id="number_phone" class="block w-full mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray form-input" placeholder="08***" type="number" required />
                             </label>
                             <label class="block text-sm">
                                 <span class="text-gray-700 dark:text-gray-400">Nama</span>
