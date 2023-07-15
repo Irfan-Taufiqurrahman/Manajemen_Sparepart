@@ -179,7 +179,7 @@ class AuthController extends Controller
         $user = User::create([
             'number_phone' => $request->number_phone,
             'name' => $request->name,
-            'role_id' => 2, // Assign role_id to 2
+            'role_id' => 3, // Assign role_id to 3 (pelaksana)
             'password' => Hash::make($request->password),
         ]);
 

@@ -43,7 +43,7 @@ Route::middleware('web')->group(function () {
                 return 'Pelaksana Dashboard';
             });
         });
-        Route::get('/logout', [AuthController::class, 'logout']);
+        Route::get('/logout', [AuthController::class, 'logout'])->name('user.logout');
         Route::get('/profile', [AuthController::class, 'me']);
         Route::get('/home', [HomeController::class, 'home'])->name('home.index');
     });
