@@ -29,25 +29,4 @@ class HomeController extends Controller
             return view('home', compact('users'));
         }
     }
-
-    /**
-     * Show the application dashboard.
-     *
-     * @return \Illuminate\Contracts\Support\Renderable
-     */
-    public function pengawasHome()
-    {
-        return view('home', ["msg" => "Hello! I am pengawas"]);
-    }
-
-
-    /**
-     * Show the application dashboard.
-     *
-     * @return \Illuminate\Contracts\Support\Renderable
-     */
-    public function adminHome()
-    {
-        return view('home', ["msg" => "Hello! I am admin"]);
-    }
 }

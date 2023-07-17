@@ -3,6 +3,7 @@
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ForgotPasswordController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\MaintenanceController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -46,6 +47,11 @@ Route::middleware('web')->group(function () {
         Route::get('/logout', [AuthController::class, 'logout'])->name('user.logout');
         Route::get('/profile', [AuthController::class, 'me']);
         Route::get('/home', [HomeController::class, 'home'])->name('home.index');
+
+        Route::get('/maintenance', [MaintenanceController::class, 'index'])->name('maintenance.index');
+        Route::get('/maintenance/create', [MaintenanceController::class, 'create'])->name('maintenance.create');
+        Route::post('/maintenance/post', [MaintenanceController::class, 'store'])->name('maintenance.post');
+        Route::delete('/maintenance/{maintenance}', [MaintenanceController::class, 'destroy'])->name('maintenance.destroy');
     });
 });
 
