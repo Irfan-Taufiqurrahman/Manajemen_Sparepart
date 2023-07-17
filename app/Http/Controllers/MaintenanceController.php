@@ -7,6 +7,7 @@ use App\Models\Part;
 use App\Models\Quality;
 use App\Models\Vehicle;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class MaintenanceController extends Controller
 {
@@ -18,10 +19,13 @@ class MaintenanceController extends Controller
 
     public function create()
     {
-        $parts = Part::all();
-        $vehicles = Vehicle::all();
-        $qualities =  Quality::all();
-        return view('maintenance.create', compact('parts', 'vehicles', 'qualities'));
+        if (Auth::check()) {
+            $parts = Part::all();
+            $vehicles = Vehicle::all();
+            $qualities =  Quality::all();
+            // dd($vehicles);
+            return view('maintenance.create', compact('parts', 'vehicles', 'qualities'));
+        }
     }
 
     public function store(Request $request)

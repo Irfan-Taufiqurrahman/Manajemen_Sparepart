@@ -1,7 +1,7 @@
 @include('assets.head')
 
-<body class="m-0 font-sans text-base antialiased font-normal dark:bg-slate-900 leading-default bg-gray-50 text-slate-500">
-    <div class="absolute w-full bg-blue-500 dark:hidden min-h-75"></div>
+<body class="m-0 font-sans text-base antialiased font-normal leading-default bg-gray-50 text-slate-500">
+
     @include('assets.sidebar')
     <main class="relative h-full max-h-screen transition-all duration-200 ease-in-out xl:ml-68 rounded-xl">
         @include('assets.navbar')
@@ -12,14 +12,14 @@
             <div class="flex flex-wrap -mx-3">
                 <!-- card1 -->
                 <div class="w-full max-w-full px-3 mb-6 sm:w-1/2 sm:flex-none xl:mb-0 xl:w-1/4">
-                    <div class="relative flex flex-col min-w-0 break-words bg-white shadow-xl dark:bg-slate-850 dark:shadow-dark-xl rounded-2xl bg-clip-border">
+                    <div class="relative flex flex-col min-w-0 break-words bg-white shadow-xl rounded-2xl bg-clip-border">
                         <div class="flex-auto p-4">
                             <div class="flex flex-row -mx-3">
                                 <div class="flex-none w-2/3 max-w-full px-3">
                                     <div>
-                                        <p class="mb-0 font-sans text-sm font-semibold leading-normal uppercase dark:text-white dark:opacity-60">Today's Money</p>
-                                        <h5 class="mb-2 font-bold dark:text-white">$53,000</h5>
-                                        <p class="mb-0 dark:text-white dark:opacity-60">
+                                        <p class="mb-0 font-sans text-sm font-semibold leading-normal uppercase">Today's Money</p>
+                                        <h5 class="mb-2 font-bold">$53,000</h5>
+                                        <p class="mb-0 ">
                                             <span class="text-sm font-bold leading-normal text-emerald-500">+55%</span>
                                             since yesterday
                                         </p>
@@ -37,14 +37,14 @@
 
                 <!-- card2 -->
                 <div class="w-full max-w-full px-3 mb-6 sm:w-1/2 sm:flex-none xl:mb-0 xl:w-1/4">
-                    <div class="relative flex flex-col min-w-0 break-words bg-white shadow-xl dark:bg-slate-850 dark:shadow-dark-xl rounded-2xl bg-clip-border">
+                    <div class="relative flex flex-col min-w-0 break-words bg-white shadow-xl rounded-2xl bg-clip-border">
                         <div class="flex-auto p-4">
                             <div class="flex flex-row -mx-3">
                                 <div class="flex-none w-2/3 max-w-full px-3">
                                     <div>
-                                        <p class="mb-0 font-sans text-sm font-semibold leading-normal uppercase dark:text-white dark:opacity-60">Today's Users</p>
-                                        <h5 class="mb-2 font-bold dark:text-white">2,300</h5>
-                                        <p class="mb-0 dark:text-white dark:opacity-60">
+                                        <p class="mb-0 font-sans text-sm font-semibold leading-normal uppercase ">Today's Users</p>
+                                        <h5 class="mb-2 font-bold ">2,300</h5>
+                                        <p class="mb-0 ">
                                             <span class="text-sm font-bold leading-normal text-emerald-500">+3%</span>
                                             since last week
                                         </p>
@@ -62,14 +62,14 @@
 
                 <!-- card3 -->
                 <div class="w-full max-w-full px-3 mb-6 sm:w-1/2 sm:flex-none xl:mb-0 xl:w-1/4">
-                    <div class="relative flex flex-col min-w-0 break-words bg-white shadow-xl dark:bg-slate-850 dark:shadow-dark-xl rounded-2xl bg-clip-border">
+                    <div class="relative flex flex-col min-w-0 break-words bg-white shadow-xl  rounded-2xl bg-clip-border">
                         <div class="flex-auto p-4">
                             <div class="flex flex-row -mx-3">
                                 <div class="flex-none w-2/3 max-w-full px-3">
                                     <div>
-                                        <p class="mb-0 font-sans text-sm font-semibold leading-normal uppercase dark:text-white dark:opacity-60">New Clients</p>
-                                        <h5 class="mb-2 font-bold dark:text-white">+3,462</h5>
-                                        <p class="mb-0 dark:text-white dark:opacity-60">
+                                        <p class="mb-0 font-sans text-sm font-semibold leading-normal uppercase ">New Clients</p>
+                                        <h5 class="mb-2 font-bold">+3,462</h5>
+                                        <p class="mb-0 ">
                                             <span class="text-sm font-bold leading-normal text-red-600">-2%</span>
                                             since last quarter
                                         </p>
@@ -87,14 +87,14 @@
 
                 <!-- card4 -->
                 <div class="w-full max-w-full px-3 sm:w-1/2 sm:flex-none xl:w-1/4">
-                    <div class="relative flex flex-col min-w-0 break-words bg-white shadow-xl dark:bg-slate-850 dark:shadow-dark-xl rounded-2xl bg-clip-border">
+                    <div class="relative flex flex-col min-w-0 break-words bg-white shadow-xl rounded-2xl bg-clip-border">
                         <div class="flex-auto p-4">
                             <div class="flex flex-row -mx-3">
                                 <div class="flex-none w-2/3 max-w-full px-3">
                                     <div>
-                                        <p class="mb-0 font-sans text-sm font-semibold leading-normal uppercase dark:text-white dark:opacity-60">Sales</p>
-                                        <h5 class="mb-2 font-bold dark:text-white">$103,430</h5>
-                                        <p class="mb-0 dark:text-white dark:opacity-60">
+                                        <p class="mb-0 font-sans text-sm font-semibold leading-normal uppercase">Sales</p>
+                                        <h5 class="mb-2 font-bold">$103,430</h5>
+                                        <p class="mb-0 ">
                                             <span class="text-sm font-bold leading-normal text-emerald-500">+5%</span>
                                             than last month
                                         </p>
@@ -113,7 +113,7 @@
 
         </div>
         <!-- end cards -->
-        <div class="text-center text-gray-800 dark:text-gray-200">
+        <div class="text-center text-gray-800">
 
             <!-- Add this inside the <body> tag of your Blade PHP file -->
             <div class="container mx-auto mt-8">
@@ -129,10 +129,10 @@
                     <tbody>
                         @foreach($users as $user)
                         <tr>
-                            <td class="border px-4 py-2 dark:bg-gray-900">{{ $user->name }}</td>
-                            <td class="border px-4 py-2 dark:bg-gray-900">{{ $user->role->name }}</td>
+                            <td class="border px-4 py-2 ">{{ $user->name }}</td>
+                            <td class="border px-4 py-2 ">{{ $user->role->name }}</td>
 
-                            <td class="border px-4 py-2 dark:bg-gray-900">
+                            <td class="border px-4 py-2">
                                 <button>
                                     <form action="#" method="POST">
                                         @csrf
