@@ -8,13 +8,22 @@ use App\Models\Quality;
 use App\Models\Vehicle;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Carbon\Carbon;
 
 class MaintenanceController extends Controller
 {
+    public function tes()
+    {
+        return view('tes.tes');
+    }
+
     public function index()
     {
         $maintenance = Maintenance::all();
-        return view('maintenance', compact('maintenance'));
+        $parts = Part::all();
+        $vehicles = Vehicle::all();
+        $qualities =  Quality::all();
+        return view('maintenance', compact('maintenance', 'parts', 'vehicles', 'qualities'));
     }
 
     public function create()
@@ -32,17 +41,16 @@ class MaintenanceController extends Controller
     {
         $maintenance = new Maintenance();
         $maintenance->part_id = $request->part_id;
-        $maintenance->vihicle_id =  $request->vehicle_id;
+        $maintenance->vehicle_id =  $request->vehicle_id;
         $maintenance->quality_id = $request->quality_id;
         $maintenance->description = $request->description;
-        $maintenance->createdBy = $request->createdBy;
-        // $maintenance->file_image = $request->file_image;
-        $gambar = array();
-        //save foto barang
+        $maintenance->tanggal = Carbon::now(); // Example: "22 July 2023"
+        $maintenance->createdBy = Auth::user()->name;
         if ($request->hasFile('file_image')) {
-            $image =  $request->file('file_image')->move('foto_kondisi/', $request->file('fotoDokumen')->getClientOriginalName());
-            $maintenance->file_image = $request->file('file_image')->getClientOriginalName();
-            $gambar[] =  $maintenance->file_image;
+            $file = $request->file('file_image');
+            $filename = time() . '_' . $file->getClientOriginalName();
+            $file->storeAs('foto_kondisi', $filename, 'public'); // Save the file to the 'public' disk under 'foto_kondisi' directory
+            $maintenance->file_image = $filename;
         }
 
         $maintenance->save();

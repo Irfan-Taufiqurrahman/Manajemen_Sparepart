@@ -21,6 +21,7 @@ use Illuminate\Support\Facades\Route;
 
 
 Route::middleware('web')->group(function () {
+    Route::get('/tes', [MaintenanceController::class, 'tes'])->name('tes.fitur');
     Route::get('/login', [AuthController::class, 'showLoginForm'])->name('auth.loginIndex');
     Route::post('/login', [AuthController::class, 'login'])->name('auth.login');
     Route::get('/registers', [AuthController::class, 'showRegistrationForm'])->name('auth.registerIndex');

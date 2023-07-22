@@ -21,6 +21,7 @@ class CreateMaintenancesTable extends Migration
             $table->foreignId('quality_id')->references('id')->on('qualities')->onDelete('cascade');
             $table->string('description');
             $table->string('createdBy');
+            $table->date('tanggal');
             $table->timestamps();
         });
     }

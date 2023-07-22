@@ -32,4 +32,18 @@ class Maintenance extends Model
     {
         return $this->belongsTo(Quality::class);
     }
+
+    public function show_vehicle()
+    {
+        return $this->belongsTo(Vehicle::class, 'vehicle_id');
+    }
+
+    public function show_quality()
+    {
+        return $this->belongsTo(Quality::class, 'quality_id');
+    }
+    public function show_part()
+    {
+        return $this->belongsTo(Part::class, 'part_id');
+    }
 }
