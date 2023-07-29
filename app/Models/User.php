@@ -25,9 +25,9 @@ class User extends Authenticatable
     ];
 
     // Constrans for roles
-    const ROLE_ADMIN = 'admin';
-    const ROLE_PENGAWAS = 'pengawas';
-    const ROLE_PELAKSANA = 'pelaksana';
+    const ROLE_ADMIN = 'Admin';
+    const ROLE_PENGAWAS = 'Pengawas';
+    const ROLE_PELAKSANA = 'Pelaksana';
 
     /**
      * The attributes that should be hidden for serialization.

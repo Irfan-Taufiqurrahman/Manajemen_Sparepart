@@ -11,53 +11,8 @@ use Carbon\Carbon;
         <div class="h-full overflow-y-auto"></div>
         <!-- cards -->
         <div class="w-full px-6 py-6 mx-auto">
-
             <!-- row 1 -->
             <div class="flex flex-wrap -mx-3">
-                <!-- card1 -->
-                <div class="w-full max-w-full px-3 mb-6 sm:w-1/2 sm:flex-none xl:mb-0 xl:w-1/4">
-                    <div class="relative flex flex-col min-w-0 break-words bg-white shadow-xl">
-                        <div class="flex-auto p-4">
-                            <div class="flex flex-row -mx-3">
-                                <div class="flex-none w-2/3 max-w-full px-3">
-                                    <div>
-                                        <p class="mb-0 font-sans text-sm font-semibold leading-normal">Jenis Part</p>
-                                        <h5 class="mb-2 font-bold pt-1">{{ $totalParts }}</h5>
-
-                                    </div>
-                                </div>
-                                <div class="px-3 text-right basis-1/3">
-                                    <div class="inline-block w-12 h-12 text-center rounded-circle bg-gradient-to-tl from-blue-500 to-violet-500">
-                                        <i class="ni leading-none ni-money-coins text-lg relative top-3.5 text-white"></i>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- card2 -->
-                <div class="w-full max-w-full px-3 mb-6 sm:w-1/2 sm:flex-none xl:mb-0 xl:w-1/4">
-                    <div class="relative flex flex-col min-w-0 break-words bg-white shadow-xl rounded-2xl bg-clip-border">
-                        <div class="flex-auto p-4">
-                            <div class="flex flex-row -mx-3">
-                                <div class="flex-none w-2/3 max-w-full px-3">
-                                    <div>
-                                        <p class="mb-0 font-sans text-sm font-semibold leading-normal">Jenis Kendaraan</p>
-                                        <h5 class="mb-2 font-bold pt-1">{{ $totalVehicle }}</h5>
-
-                                    </div>
-                                </div>
-                                <div class="px-3 text-right basis-1/3">
-                                    <div class="inline-block w-12 h-12 text-center rounded-circle bg-gradient-to-tl from-red-600 to-orange-600">
-                                        <i class="ni leading-none ni-world text-lg relative top-3.5 text-white"></i>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
                 <!-- card3 -->
                 <div class="w-full max-w-full px-3 mb-6 sm:w-1/2 sm:flex-none xl:mb-0 xl:w-2/6">
                     <div class="relative flex flex-col min-w-0 break-words bg-white shadow-xl rounded-2xl bg-clip-border">
@@ -95,7 +50,6 @@ use Carbon\Carbon;
                         </div>
                     </div>
                 </div>
-
                 <!-- card4 -->
             </div>
 
@@ -103,7 +57,7 @@ use Carbon\Carbon;
         <!-- end cards -->
         <!-- Button modal -->
         <div class="ml-7">
-            <button class="px-4 py-2 text-white bg-green-600 rounded-md hover:bg-green-500" onclick="toggleModal('modalForm')">Create Maintenance</button>
+            <!--<button class="px-4 py-2 text-white bg-green-600 rounded-md hover:bg-green-500" onclick="toggleModal('modalForm')">Isi Logbook Kilometer</button>-->
         </div>
         <!-- end Button modal -->
         <div class="text-center text-gray-800 ">
@@ -116,7 +70,7 @@ use Carbon\Carbon;
                     <div class="inline-block p-6 my-8 overflow-hidden text-left align-middle bg-white rounded-lg shadow-xl transform transition-all sm:align-middle sm:max-w-lg sm:w-full">
                         <!-- Modal Header -->
                         <div class="flex justify-between items-center mb-4">
-                            <h3 class="text-lg font-semibold">Create Maintenance</h3>
+                            <h3 class="text-lg font-semibold">Add Kilometer</h3>
                             <!-- "X" icon to close the modal -->
                             <button class="text-gray-500 hover:text-gray-600 focus:outline-none" onclick="toggleModal('modalForm')">
                                 <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
@@ -124,9 +78,7 @@ use Carbon\Carbon;
                                 </svg>
                             </button>
                         </div>
-
                         <!-- Form content here (input fields, etc.) -->
-                        @include('maintenance.create')
 
                         </form>
                     </div>
@@ -139,7 +91,7 @@ use Carbon\Carbon;
                     <div class="mb-4 grid grid-cols-2 md:grid-cols-3 xl:grid-cols-6 gap-2 mt-4">
                         <label for="filterMonth" class="text-base">Filter Berdasarkan bulan:</label>
                         <select id="filterMonth" class="px-4 py-3 w-full rounded-md bg-gray-50 border-transparent border border-gray-300 focus:border-gray-500 focus:bg-white focus:ring-0 text-sm">
-                            <option value="" onclick="clearMonthFilter()">Bulan</option>
+                            <option value="">Bulan</option>
                             <option value="January">Januari</option>
                             <option value="February">Februari</option>
                             <option value="March">Maret</option>
@@ -152,6 +104,7 @@ use Carbon\Carbon;
                             <option value="October">Oktober</option>
                             <option value="November">November</option>
                             <option value="December">Desember</option>
+
                             <!-- Add other months as needed -->
                         </select>
                     </div>
@@ -160,22 +113,22 @@ use Carbon\Carbon;
                             <tr>
                                 <th class="px-4 py-2 col">Gambar Bukti</th>
                                 <th class="px-4 py-2 col">Kendaraan</th>
-                                <th class="px-4 py-2 col">Part</th>
-                                <th class="px-4 py-2 col filter-quality">Quality</th>
+                                <th class="px-4 py-2 col">Kilometer</th>
                                 <th class="px-4 py-2 col">Deskripsi</th>
                                 <th class="px-4 py-2 col">Dibuat Oleh</th>
                                 <th class="px-4 py-2 col">Tanggal</th>
+                                <th class="px-4 py-2 col">Status Service</th>
                                 <th class="px-4 py-2 col">Aksi</th>
                             </tr>
                         </thead>
                         <tbody>
                             <div>
-                                @foreach($maintenance as $item)
+                                @foreach($serviceTimes as $item)
                                 <tr>
                                     <td class="border px-4 py-2 flex justify-center items-center">
                                         <div x-data="{ open: false }">
                                             <!-- Image Thumbnail -->
-                                            <img src="{{ asset('storage/foto_kondisi/' . $item->file_image) }}" alt="tes" class="w-32 h-32 object-cover cursor-pointer" @click="open = true">
+                                            <img src="{{ asset('storage/foto_kondisi/' . $item->image) }}" alt="" class="w-32 h-32 object-cover cursor-pointer" @click="open = true">
                                             <!-- Modal -->
                                             <div x-show="open" @click.away="open = false" @keydown.escape.window="open = false" class="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
                                                 <div class="bg-white rounded-lg p-4 shadow-lg max-w-xl mx-auto">
@@ -186,7 +139,7 @@ use Carbon\Carbon;
                                                             </svg>
                                                         </button>
                                                     </div>
-                                                    <img src="{{ asset('storage/foto_kondisi/' . $item->file_image) }}" alt="tes" class="w-full h-auto max-h-screen">
+                                                    <img src="{{ asset('storage/foto_kondisi/' . $item->image) }}" alt="tes" class="w-full h-auto max-h-screen">
                                                     <button @click="open = false" class="mt-4 px-4 py-2 bg-gray-800 text-white rounded">Close</button>
                                                 </div>
                                             </div>
@@ -194,20 +147,17 @@ use Carbon\Carbon;
                                     </td>
 
                                     <td class="border px-4 py-2 ">{{ $item->show_vehicle->name }}</td>
-                                    <td class="border px-4 py-2 ">{{ $item->show_part->name }}</td>
-                                    <td class="border px-4 py-2 ">{{ $item->show_quality->name }}</td>
-                                    <td class="border px-4 py-2 ">{{ $item->description }}</td>
+                                    <td class="border px-4 py-2">{{ $item->number ? number_format($item->number) . ' Kilometer' : '-' }}</td>
+                                    <td class="border px-4 py-2 ">{{ $item->description ?? '-' }}</td>
                                     <td class="border px-4 py-2">{{ $item->createdBy }}</td>
                                     <td class="border px-4 py-2">{{ Carbon::parse($item->tanggal)->format('d F Y') }}
-                                    </td>
+                                    <td class="border px-4 py-2">{{ $item->status_service }}</td>
                                     <td class="border px-4 py-2 ">
-                                        <button>
-                                            <form action="{{ route('maintenance.destroy', $item) }}" method="POST">
-                                                @csrf
-                                                @method('DELETE')
-                                                <button type="submit" class="text-red-500">Hapus</button>
-                                            </form>
-                                        </button>
+                                        <form action="{{ route('service.destroy', $item) }}" method="POST">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="submit" class="text-red-500">Hapus</button>
+                                        </form>
                                     </td>
                                 </tr>
                                 @endforeach
@@ -250,10 +200,6 @@ use Carbon\Carbon;
     </script>
 
 
-    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/npm/alpinejs@2.8.2/dist/alpine.min.js" defer></script>
-
-    @include('assets.script')
     <script>
         // Initialize the DataTable
         $(document).ready(function() {
@@ -268,15 +214,14 @@ use Carbon\Carbon;
 
                 // Apply the new month filter
                 if (selectedMonth) {
-                    table.column(6).search(selectedMonth, true, false).draw();
+                    table.column(5).search(selectedMonth, true, false).draw();
                 }
             });
         });
-        // Add a function to clear the month filter and show all data
-        function clearMonthFilter() {
-            var table = $('#dataTable').DataTable();
-            $('#filterMonth').val(''); // Reset the filter dropdown to its initial state
-            table.search('').draw(); // Clear any existing search filter
-        }
     </script>
+
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/alpinejs@2.8.2/dist/alpine.min.js" defer></script>
+
+    @include('assets.script')
 </body>

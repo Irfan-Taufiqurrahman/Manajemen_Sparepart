@@ -14,4 +14,9 @@ class Vehicle extends Model
         'colour',
         'tahun_pembuatan',
     ];
+
+    public function Kilometers()
+    {
+        return $this->hasMany(Kilometer::class);
+    }
 }

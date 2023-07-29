@@ -37,5 +37,17 @@ class PartSeeder extends Seeder
         Part::create([
             'name' => 'Rem',
         ]);
+
+        Part::create([
+            'name' => 'Lampu Rem',
+        ]);
+
+        Part::create([
+            'name' => 'Lampu Depan',
+        ]);
+
+        Part::create([
+            'name' => 'Lampu Sen',
+        ]);
     }
 }

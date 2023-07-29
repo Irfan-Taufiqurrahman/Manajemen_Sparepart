@@ -24,6 +24,11 @@ class AuthController extends Controller
     //  */
     // protected $redirectTo = RouteServiceProvider::HOME;
 
+    public function errorPage()
+    {
+        return view('auth/error');
+    }
+
     public function showLoginForm()
     {
         return view('auth/login');
@@ -110,20 +115,27 @@ class AuthController extends Controller
     }
     //end of function edit
 
-    public function deleteAdmin($id)
+    // public function deleteAdmin($id)
+    // {
+    //     try {
+    //         $user = User::find($id);
+    //         return $user->delete();
+    //         return ResponseFormatter::success([
+    //             'message' => 'User deleted succesfull',
+    //         ], 'User deleted succesfull', 500);
+    //     } catch (QueryException $error) {
+    //         return ResponseFormatter::error([
+    //             'message' => 'something went wrong',
+    //             'error' => $error,
+    //         ], 'User not deleted', 500);
+    //     }
+    // }
+
+    public function destroyUser(User $user)
     {
-        try {
-            $user = User::find($id);
-            return $user->delete();
-            return ResponseFormatter::success([
-                'message' => 'User deleted succesfull',
-            ], 'User deleted succesfull', 500);
-        } catch (QueryException $error) {
-            return ResponseFormatter::error([
-                'message' => 'something went wrong',
-                'error' => $error,
-            ], 'User not deleted', 500);
-        }
+        $user->delete();
+
+        return redirect()->route('users.users')->with('success', 'Kondisi Barang Berhasil Dihapus');
     }
 
     // //start of function register with API
@@ -245,11 +257,11 @@ class AuthController extends Controller
 
         if (auth()->attempt(array('number_phone' => $input['number_phone'], 'password' => $input['password']))) {
             if (auth()->user()->role == 'admin') {
-                return redirect()->route('home.index');
+                return redirect()->route('maintenance.index');
             } else if (auth()->user()->role == 'pengawas') {
-                return redirect()->route('home.index');
+                return redirect()->route('maintenance.index');
             } else {
-                return redirect()->route('home.index');
+                return redirect()->route('maintenance.index');
             }
         } else {
             return redirect()

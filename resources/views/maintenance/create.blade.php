@@ -1,6 +1,6 @@
 <form method="POST" action="{{ route('maintenance.post') }}" enctype="multipart/form-data">
     @csrf
-    <div>
+    <div class="pt-4">
         <label for="name" class="text-gray-800 text-sm font-bold leading-tight tracking-normal">Part </label>
     </div>
     <select name="part_id" class="form-control bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" id="part_id" required>
@@ -47,7 +47,7 @@
             </label>
         </div>
         <div class="md:w-2/3">
-            <input class="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500" type="file" id="file_image" name="file_image" required>
+            <input class="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500" type="file" id="file_image" name="file_image" accept="image/*" required>
         </div>
     </div>
     <div class="flex items-center justify-start w-full">

@@ -10,7 +10,7 @@ class AdminMiddleware
     public function handle($request, Closure $next)
     {
         if ($request->user() && strtolower($request->user()->role->name) !== User::ROLE_ADMIN) {
-            return response('Unauthorized', 401);
+            return redirect()->route('auth.errors');
         }
 
         return $next($request);

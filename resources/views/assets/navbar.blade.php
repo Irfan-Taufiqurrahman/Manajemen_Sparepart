@@ -1,24 +1,35 @@
 <nav class="relative flex flex-wrap items-center justify-between px-0 py-2 mx-6 transition-all ease-in shadow-none duration-250 rounded-2xl lg:flex-nowrap lg:justify-start" navbar-main navbar-scroll="false">
     <div class="flex items-center justify-between w-full px-4 py-1 mx-auto flex-wrap-inherit">
+        <button @click="isSidebarOpen = !isSidebarOpen" aria-controls="separator-sidebar" type="button" class="inline-flex items-center p-2 mt-2 ml-3 text-sm text-gray-500 rounded-lg sm:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200">
+            <span class="sr-only">Open sidebar</span>
+            <svg :class="{ 'rotate-180': isSidebarOpen }" class="w-6 h-6" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                <path clip-rule="evenodd" fill-rule="evenodd" d="M2 4.75A.75.75 0 012.75 4h14.5a.75.75 0 010 1.5H2.75A.75.75 0 012 4.75zm0 10.5a.75.75 0 01.75-.75h7.5a.75.75 0 010 1.5h-7.5a.75.75 0 01-.75-.75zM2 10a.75.75 0 01.75-.75h14.5a.75.75 0 010 1.5H2.75A.75.75 0 012 10z"></path>
+            </svg>
+        </button>
         <nav>
             <!-- breadcrumb -->
             <ol class="flex flex-wrap pt-1 mr-12 bg-transparent rounded-lg sm:mr-16">
                 <li class="flex items-center xl:hidden">
-                    <a href="javascript:;" class="block p-0 text-sm text-black transition-all ease-nav-brand" sidenav-trigger>
+                    <!--<a href="javascript:;" class="block p-0 text-sm text-black transition-all ease-nav-brand" sidenav-trigger>
                         <div class="w-6 overflow-hidden">
                             <i class="ease mb-0.75 relative block h-0.5 rounded-sm bg-black transition-all"></i>
                             <i class="ease mb-0.75 relative block h-0.5 rounded-sm bg-black transition-all"></i>
                             <i class="ease relative block h-0.5 rounded-sm bg-black transition-all"></i>
                         </div>
-                    </a>
+                    </a>-->
                 </li>
 
                 <li class="text-sm leading-normal pl-7">
                     <a class="text-gray-800 opacity-50" href="javascript:;">Pages</a>
                 </li>
-                <li class="text-sm pl-2 capitalize leading-normal text-gray-800 before:float-left before:pr-2 before:text-gray-800 before:content-['/']" aria-current="page">Dashboard</li>
+                @php
+                $currentRouteName = \Illuminate\Support\Facades\Route::currentRouteName();
+                $routeArray = explode('.', $currentRouteName);
+                $lastSegment = end($routeArray);
+                @endphp
+                <li class="text-sm pl-2 capitalize leading-normal text-gray-800 before:float-left before:pr-2 before:text-gray-800 before:content-['/']" aria-current="page">{{ $lastSegment }}</li>
             </ol>
-            <h6 class="mb-0 font-bold text-gray-800 capitalize hidden sm:inline pl-7">Dashboard</h6>
+            <h6 class="mb-0 font-bold text-gray-800 capitalize hidden sm:inline pl-7">{{ $lastSegment }}</h6>
         </nav>
 
         <div class="flex items-center mt-2 grow sm:mt-0 sm:mr-6 md:mr-0 lg:flex lg:basis-auto">

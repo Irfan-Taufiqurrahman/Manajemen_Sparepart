@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "0161e75dfedcf7fc04d29b1884fde471",
+    "content-hash": "b752b383f18b588cd05c17f24daeaaae",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -1818,6 +1818,49 @@
                 "source": "https://github.com/opis/closure/tree/3.6.3"
             },
             "time": "2022-01-27T09:35:39+00:00"
+        },
+        {
+            "name": "ozdemir/datatables",
+            "version": "2.3.7",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/n1crack/datatables.git",
+                "reference": "7d8d51dccc1647fc68d3b6f90453e3f8b8b8bf9d"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/n1crack/datatables/zipball/7d8d51dccc1647fc68d3b6f90453e3f8b8b8bf9d",
+                "reference": "7d8d51dccc1647fc68d3b6f90453e3f8b8b8bf9d",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=7.1.3"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^7.0|^8.0|^9.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Ozdemir\\Datatables\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Yusuf Özdemir",
+                    "email": "yusuf@ozdemir.be"
+                }
+            ],
+            "description": "PHP Library to handle server-side processing for Datatables, in a fast and simple way.",
+            "support": {
+                "issues": "https://github.com/n1crack/datatables/issues",
+                "source": "https://github.com/n1crack/datatables/tree/2.3.7"
+            },
+            "time": "2023-05-29T10:42:49+00:00"
         },
         {
             "name": "phpoption/phpoption",
