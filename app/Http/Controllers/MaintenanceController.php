@@ -7,6 +7,8 @@ use App\Models\Maintenance;
 use App\Models\Part;
 use App\Models\Quality;
 use App\Models\Vehicle;
+use Barryvdh\DomPDF\Facade\Pdf as FacadePdf;
+use Barryvdh\DomPDF\PDF;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Carbon\Carbon;
@@ -32,6 +34,20 @@ class MaintenanceController extends Controller
             }
         }
         return view('tes.tes', compact('maintenance', 'parts', 'vehicles', 'qualities', 'totalParts', 'totalVehicle', 'totalQualities', 'barangRusak', 'serviceTimes'));
+    }
+
+    public function viewPdf(Request $request)
+    {
+        // $data = Maintenance::all();
+        $data = Maintenance::all();
+
+        // $pdf = FacadePdf::loadHTML('<h1>Hello ini PDF</h1>');
+        $pdf = FacadePdf::loadView('pdf.exportpdf', ['data' => $data]);
+        return $pdf->stream();
+        // $pdf = PDF::loadView('export-pdf', ['data' => $data])->setPaper('a4', 'portrait');
+        // dd($data);
+        // $fileName = 'maintenance_report_' . Carbon::now()->format('Ymd_His') . '.pdf';
+        // return $pdf->download('fileNamemaintenance_report . pdf');
     }
 
     public function index()
@@ -82,7 +98,6 @@ class MaintenanceController extends Controller
 
         $maintenance->save();
 
-        // Fetch the damaged items based on quality_id 3 (assumed to be "bad" quality)
         $barangRusak = DB::table('maintenances')
             ->join('vehicles', 'maintenances.vehicle_id', '=', 'vehicles.id')
             ->join('parts', 'maintenances.part_id', '=', 'parts.id')
@@ -90,59 +105,43 @@ class MaintenanceController extends Controller
             ->select('maintenances.*', 'vehicles.name as vehicle_name', 'parts.name as part_name')
             ->get();
 
-        // Get all the records from HistoryKilometer model
-        $serviceTimes = HistoryKilometer::all();
-
-        // Filter the records to get only those with a non-null 'number' value
-        $serviceTimesWithNumber = $serviceTimes->filter(function ($item) {
-            return !empty($item->number) && !is_null($item->number);
-        });
-
-        // Assuming 'maintenances' is the related model for damaged items
-        $barangRusak = Maintenance::where('quality_id', 3)->get();
+        // $serviceTimesWithNumber = new HistoryKilometer();
+        $serviceTimesWithNumber = HistoryKilometer::whereNotNull('number')->get();
 
         // Set the message based on the existence of damaged items
-        $message = '';
-        $vehicles = []; // Array to keep track of unique vehicle names
+        $messages = '';
 
-        $message .= '[ SISTEM OTOMATIS MESSAGE MAINTENANCE VEHICLE ]' . PHP_EOL;
-        $message .= 'Salam sehat bapak/ ibu, izin memberitahukan bahwa:' . PHP_EOL;
+        $messages .= '[ SISTEM OTOMATIS MESSAGE MAINTENANCE VEHICLE ]' . PHP_EOL;
+        $messages .= 'Salam sehat bapak/ ibu, izin memberitahukan bahwa : ' . PHP_EOL;
 
         // Check if $barangRusak has data before adding it to the message
         if (count($barangRusak) > 0) {
             foreach ($barangRusak as $item) {
-                // Check if the vehicle name is not already added to the list
-                if (!in_array($item->vehicle_name, $vehicles)) {
-                    $message .= '- ' . $item->vehicle_name . ' bagian ' . $item->part_name . PHP_EOL;
-                    $vehicles[] = $item->vehicle_name; // Add the vehicle name to the list
-                }
+                $messages .= '- ' . $item->vehicle_name . ' bagian ' . $item->part_name . PHP_EOL;
             }
         } else {
-            $message .= '' . PHP_EOL;
+            $messages .= '' . PHP_EOL;
         }
 
         // Check if $serviceTimesWithNumber has data before adding it to the message
-        if (count($serviceTimesWithNumber) > 0) {
+        if ($serviceTimesWithNumber->count() > 0) {
             foreach ($serviceTimesWithNumber as $item) {
-                // Check if the vehicle name is not already added to the list
-                if (!in_array($item->show_vehicle->name, $vehicles)) {
-                    $message .= '- ' . $item->show_vehicle->name . ' - waktunya ganti oli atau servis rutin' . PHP_EOL;
-                    $vehicles[] = $item->show_vehicle->name; // Add the vehicle name to the list
-                }
+                $messages .= '- ' . $item->show_vehicle->name . ' - waktunya ganti oli atau servis rutin' . PHP_EOL;
             }
         } else {
-            $message .= '' . PHP_EOL;
+            $messages .= '' . PHP_EOL;
         }
 
-        $message .= '' . PHP_EOL;
-        $message .= 'Perlu dilakukan perbaikan' . PHP_EOL;
-        $message .= '' . PHP_EOL;
-        $message .= 'Informasi lebih lanjut silahkan cek pada website yang telah disediakan:' . PHP_EOL;
-        $message .= '...' . PHP_EOL;
-        $message .= '' . PHP_EOL;
-        $message .= 'atau hubungi tim IT PT. Samudera Suri Surabaya';
-        $message .= '' . PHP_EOL;
-        $message .= 'atas perhatiannya kami ucapkan terimakasih';
+        $messages .= '' . PHP_EOL;
+        $messages .= 'Perlu dilakukan perbaikan' . PHP_EOL;
+        $messages .= '' . PHP_EOL;
+        $messages .= 'Informasi lebih lanjut silahkan cek pada website yang telah disediakan:' . PHP_EOL;
+        $messages .= '...' . PHP_EOL;
+        $messages .= '' . PHP_EOL;
+        $messages .= 'atau hubungi tim IT PT. Samudera Suri Surabaya';
+        $messages .= '' . PHP_EOL;
+        $messages .= 'atas perhatiannya kami ucapkan terimakasih';
+
 
         //check if the kilometer record needs to be moved to history
         if ($maintenance->quality_id == 3) {
@@ -175,7 +174,7 @@ class MaintenanceController extends Controller
                 CURLOPT_CUSTOMREQUEST => 'POST',
                 CURLOPT_POSTFIELDS => array(
                     'target' => $target,
-                    'message' => $message,
+                    'message' => $messages,
                     'countryCode' => '62', //optional
                     'delay' => '5-10',
                 ),

@@ -8,8 +8,10 @@ use App\Http\Controllers\KilometerController;
 use App\Http\Controllers\MaintenanceController;
 use App\Http\Controllers\PartController;
 use App\Http\Controllers\serviceController;
+use Barryvdh\DomPDF\PDF as DomPDFPDF;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use Carbon\Carbon;
 
 /*
 |--------------------------------------------------------------------------
@@ -23,6 +25,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::middleware('web')->group(function () {
+    Route::post('/view-pdf', [MaintenanceController::class, 'viewPdf'])->name('view.pdf');
     Route::get('/tes', [MaintenanceController::class, 'tes'])->name('tes.fitur');
     Route::get('/errorpage', [AuthController::class, 'errorPage'])->name('auth.errors');
     Route::get('/login', [AuthController::class, 'showLoginForm'])->name('auth.loginIndex');

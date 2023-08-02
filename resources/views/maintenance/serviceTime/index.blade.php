@@ -96,7 +96,7 @@ use Carbon\Carbon;
                             <option value="February">Februari</option>
                             <option value="March">Maret</option>
                             <option value="April">April</option>
-                            <option value="Mei">Mei</option>
+                            <option value="May">Mei</option>
                             <option value="June">Juni</option>
                             <option value="July">Juli</option>
                             <option value="August">Agustus</option>
@@ -104,7 +104,6 @@ use Carbon\Carbon;
                             <option value="October">Oktober</option>
                             <option value="November">November</option>
                             <option value="December">Desember</option>
-
                             <!-- Add other months as needed -->
                         </select>
                     </div>
@@ -123,8 +122,14 @@ use Carbon\Carbon;
                         </thead>
                         <tbody>
                             <div>
+                                <!-- Modify the loop to filter data based on week and month -->
                                 @foreach($serviceTimes as $item)
-                                <tr>
+                                @php
+                                $weekNumber = Carbon::parse($item->tanggal)->week;
+                                $monthName = Carbon::parse($item->tanggal)->format('F');
+                                @endphp
+                                <tr data-week="{{ $weekNumber }}" data-month="{{ $monthName }}">
+
                                     <td class="border px-4 py-2 flex justify-center items-center">
                                         <div x-data="{ open: false }">
                                             <!-- Image Thumbnail -->
@@ -200,6 +205,10 @@ use Carbon\Carbon;
     </script>
 
 
+    @include('assets.script')
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/alpinejs@2.8.2/dist/alpine.min.js" defer></script>
+    <!-- Add this inside the <body> tag of your Blade PHP file -->
     <script>
         // Initialize the DataTable
         $(document).ready(function() {
@@ -214,14 +223,9 @@ use Carbon\Carbon;
 
                 // Apply the new month filter
                 if (selectedMonth) {
-                    table.column(5).search(selectedMonth, true, false).draw();
+                    table.column(5).search(selectedMonth, true, false).draw(); // Use column index 5 for "Tanggal" column
                 }
             });
         });
     </script>
-
-    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/npm/alpinejs@2.8.2/dist/alpine.min.js" defer></script>
-
-    @include('assets.script')
 </body>

@@ -78,13 +78,20 @@ class KilometerController extends Controller
 
         // $serviceTimesWithNumber = new HistoryKilometer();
         $serviceTimesWithNumber = HistoryKilometer::whereNotNull('number')->get();
-
+        // dd($serviceTimesWithNumber);
         // Set the message based on the existence of damaged items
         $messages = '';
 
         $messages .= '[ SISTEM OTOMATIS MESSAGE MAINTENANCE VEHICLE ]' . PHP_EOL;
         $messages .= 'Salam sehat bapak/ ibu, izin memberitahukan bahwa : ' . PHP_EOL;
 
+        // Check if $serviceTimesWithNumber has data before adding it to the message
+        if ($serviceTimesWithNumber->count() > 0) {
+            foreach ($serviceTimesWithNumber as $item) {
+                $messages .= '- ' . $item->show_vehicle->name . ' - waktunya ganti oli atau servis rutin' . PHP_EOL;
+            }
+            // dd($messages);
+        }
         // Check if $barangRusak has data before adding it to the message
         if (count($barangRusak) > 0) {
             foreach ($barangRusak as $item) {
@@ -94,14 +101,6 @@ class KilometerController extends Controller
             $messages .= '' . PHP_EOL;
         }
 
-        // Check if $serviceTimesWithNumber has data before adding it to the message
-        if ($serviceTimesWithNumber->count() > -1) {
-            foreach ($serviceTimesWithNumber as $item) {
-                $messages .= '- ' . $item->show_vehicle->name . ' - waktunya ganti oli atau servis rutin' . PHP_EOL;
-            }
-        } else {
-            $messages .= '' . PHP_EOL;
-        }
 
         $messages .= '' . PHP_EOL;
         $messages .= 'Perlu dilakukan perbaikan' . PHP_EOL;

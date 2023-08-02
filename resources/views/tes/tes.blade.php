@@ -5,12 +5,30 @@ use Carbon\Carbon;
 
 <!-- Add this inside the <body> tag of your Blade PHP file -->
 <div class="container mx-auto mt-8">
+    <form action="{{ route('view.pdf') }}" method="post" target="__blank">
+        @csrf
+        <div>
+            <button class="inline-block rounded-full border-2 border-primary-100 px-6 pb-[6px] pt-2 text-xs font-medium uppercase leading-normal text-primary-700 transition duration-150 ease-in-out hover:border-primary-accent-100 hover:bg-neutral-500 hover:bg-opacity-10 focus:border-primary-accent-100 focus:outline-none focus:ring-0 active:border-primary-accent-200 dark:text-primary-100 dark:hover:bg-neutral-100 dark:hover:bg-opacity-10" data-te-ripple-init>
+                <div class="flex justify-between content-center">
+                    <div class="pr-2">
+                        <svg xlmns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4" />
+                        </svg>
+                    </div>
+                    <div>
+                        View PDF
+                    </div>
+                </div>
+            </button>
+        </div>
+    </form>
     <div class="table-responsive">
         <!-- Add a new row for the month filter -->
-        <div class="mb-4">
-            <label for="filterMonth">Filter by Month:</label>
-            <select id="filterMonth">
-                <option value="">All Months</option>
+        <div class="mb-4 grid grid-cols-2 md:grid-cols-3 xl:grid-cols-6 gap-2 mt-4">
+            <label for="filterMonth" class="text-base">Filter Berdasarkan bulan:</label>
+            <select id="filterMonth" class="px-4 py-3 w-full rounded-md bg-gray-50 border-transparent border border-gray-300 focus:border-gray-500 focus:bg-white focus:ring-0 text-sm">
+                <option value="" onclick="clearMonthFilter()">Bulan</option>
                 <option value="January">Januari</option>
                 <option value="February">Februari</option>
                 <option value="March">Maret</option>
@@ -23,7 +41,6 @@ use Carbon\Carbon;
                 <option value="October">Oktober</option>
                 <option value="November">November</option>
                 <option value="December">Desember</option>
-
                 <!-- Add other months as needed -->
             </select>
         </div>
@@ -124,11 +141,10 @@ use Carbon\Carbon;
 </script>
 
 
-<link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
-<script src="https://cdn.jsdelivr.net/npm/alpinejs@2.8.2/dist/alpine.min.js" defer></script>
 
 @include('assets.script')
-
+<link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/alpinejs@2.8.2/dist/alpine.min.js" defer></script>
 <script>
     // Initialize the DataTable
     $(document).ready(function() {
@@ -147,4 +163,10 @@ use Carbon\Carbon;
             }
         });
     });
+    // Add a function to clear the month filter and show all data
+    function clearMonthFilter() {
+        var table = $('#dataTable').DataTable();
+        $('#filterMonth').val(''); // Reset the filter dropdown to its initial state
+        table.search('').draw(); // Clear any existing search filter
+    }
 </script>
