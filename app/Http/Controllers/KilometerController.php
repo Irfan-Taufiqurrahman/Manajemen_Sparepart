@@ -92,6 +92,7 @@ class KilometerController extends Controller
             }
             // dd($messages);
         }
+        $barangRusak = HistoryKilometer::where('status_service', 'no')->get();
         // Check if $barangRusak has data before adding it to the message
         if (count($barangRusak) > 0) {
             foreach ($barangRusak as $item) {
@@ -123,10 +124,19 @@ class KilometerController extends Controller
             $historyKilometer->createdBy = $kilometer->createdBy;
             // $historyKilometer->service_time = $kilometer->service_time;
             // $kilometer->image = $request->image;
-            $historyKilometer->image = $kilometer->image;
+            if ($request->hasFile('image')) {
+                $file = $request->file('image');
+                $filename = time() . '_needService_' . $file->getClientOriginalName();
+                $file->storeAs('foto_kondisi', $filename, 'public'); // Save the file to the 'public' disk under 'foto_kondisi' directory
+                $historyKilometer->image = $filename;
+            }
+            // $historyKilometer->image = $kilometer->image;
 
             $historyKilometer->save();
 
+            if ($kilometer->service_time !== 'yes' && $kilometer->image) {
+                Storage::disk('public')->delete('foto_kondisi/' . $kilometer->image);
+            }
             // // Delete the kilometer record from the main Kilometer table
             // Kilometer::truncate();
 

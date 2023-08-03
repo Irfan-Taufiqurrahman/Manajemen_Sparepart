@@ -25,7 +25,7 @@ use Carbon\Carbon;
 */
 
 Route::middleware('web')->group(function () {
-    Route::post('/view-pdf', [MaintenanceController::class, 'viewPdf'])->name('view.pdf');
+    Route::post('/view-pdf', [serviceController::class, 'viewPdf'])->name('view.pdf');
     Route::get('/tes', [MaintenanceController::class, 'tes'])->name('tes.fitur');
     Route::get('/errorpage', [AuthController::class, 'errorPage'])->name('auth.errors');
     Route::get('/login', [AuthController::class, 'showLoginForm'])->name('auth.loginIndex');
@@ -85,6 +85,8 @@ Route::middleware('web')->group(function () {
 
         //service time
         Route::get('/service', [serviceController::class, 'index'])->name('service.index');
+        // Route::get('/service/{serviceTimes}/edit', [serviceController::class, 'editView'])->name('service.editView');
+        Route::put('/service/{serviceTimes}', [serviceController::class, 'update'])->name('service.update');
         Route::delete('/service/{serviceTimes}', [serviceController::class, 'destroy'])->name('service.destroy');
     });
 });

@@ -17,8 +17,10 @@ class CreateHistoryKilometersTable extends Migration
             $table->id();
             $table->integer('number')->nullable();
             $table->foreignId('vehicle_id')->references('id')->on('vehicles')->onDelete('cascade');
+            $table->foreignId('part_id')->nullable()->references('id')->on('parts');
             $table->string('description')->nullable();
             $table->string('image');
+            $table->string('file_service_evidence')->nullable();
             $table->string('createdBy');
             $table->date('tanggal');
             $table->string('status_service')->default('no'); //add this column for service time

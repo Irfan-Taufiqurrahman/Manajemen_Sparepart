@@ -36,20 +36,6 @@ class MaintenanceController extends Controller
         return view('tes.tes', compact('maintenance', 'parts', 'vehicles', 'qualities', 'totalParts', 'totalVehicle', 'totalQualities', 'barangRusak', 'serviceTimes'));
     }
 
-    public function viewPdf(Request $request)
-    {
-        // $data = Maintenance::all();
-        $data = Maintenance::all();
-
-        // $pdf = FacadePdf::loadHTML('<h1>Hello ini PDF</h1>');
-        $pdf = FacadePdf::loadView('pdf.exportpdf', ['data' => $data]);
-        return $pdf->stream();
-        // $pdf = PDF::loadView('export-pdf', ['data' => $data])->setPaper('a4', 'portrait');
-        // dd($data);
-        // $fileName = 'maintenance_report_' . Carbon::now()->format('Ymd_His') . '.pdf';
-        // return $pdf->download('fileNamemaintenance_report . pdf');
-    }
-
     public function index()
     {
         $totalParts = Part::count();
@@ -142,18 +128,16 @@ class MaintenanceController extends Controller
         $messages .= '' . PHP_EOL;
         $messages .= 'atas perhatiannya kami ucapkan terimakasih';
 
-
         //check if the kilometer record needs to be moved to history
         if ($maintenance->quality_id == 3) {
             // Move the kilometer record to history_kilometers table
             $historyKilometer = new HistoryKilometer();
             // $historyKilometer->number = $maintenance->number;
             $historyKilometer->vehicle_id = $maintenance->vehicle_id;
+            $historyKilometer->part_id = $maintenance->part_id;
             $historyKilometer->description = $maintenance->description;
             $historyKilometer->tanggal = $maintenance->tanggal;
             $historyKilometer->createdBy = $maintenance->createdBy;
-            // $historyKilometer->service_time = $maintenance->service_time;
-            // $kilometer->image = $request->image;
             $historyKilometer->image = $maintenance->file_image;
 
             $historyKilometer->save();

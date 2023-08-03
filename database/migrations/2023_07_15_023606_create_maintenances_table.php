@@ -19,7 +19,7 @@ class CreateMaintenancesTable extends Migration
             $table->foreignId('part_id')->references('id')->on('parts')->onDelete('cascade');
             $table->foreignId('vehicle_id')->references('id')->on('vehicles')->onDelete('cascade');
             $table->foreignId('quality_id')->references('id')->on('qualities')->onDelete('cascade');
-            $table->string('description');
+            $table->string('description')->nullable();
             $table->string('createdBy');
             $table->date('tanggal');
             $table->timestamps();

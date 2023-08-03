@@ -52,8 +52,14 @@
     <div style="width: 10%; float: left; margin-right: 20px;">
         <img src="img/Logo_PT.png" width="100%" alt="">
     </div>
-    <div style="width: 50%; float: left; vertical-align: middle;">
-        Report Part
+    <div style="width: 50%; float: left; vertical-align: middle; font-family: 'Roboto', sans-serif;">
+        <div style="font-size: xx-large;">
+            Report Part
+        </div>
+        <div>
+            @if($from && $to) range tanggal : {{ $from }} hingga {{ $to }} @endif
+        </div>
+
     </div>
 </div>
 
@@ -63,25 +69,27 @@
             <th>Gambar Bukti</th>
             <th>Kendaraan</th>
             <th>Part</th>
-            <th>Quality</th>
+            <th>Kilometer</th>
             <th>Deskripsi</th>
-            <th>Dibuat Oleh</th>
+            <th>Di Input Oleh</th>
             <th>Tanggal</th>
+            <th>status service</th>
         </tr>
     </thead>
     <tbody>
         @foreach($data as $item)
         <tr>
             <td data-column="Gambar">
-                <img src="{{ public_path('storage/foto_kondisi/' . $item->file_image) }}" style=" width: 100px; height: 100px;" alt="">
+                <img src="{{ public_path('storage/foto_kondisi/' . $item->image) }}" style=" width: 100px; height: 100px;" alt="">
                 <!--{{ $item->file_image }}-->
             </td>
             <td data-column="Kendaraan">{{ $item->show_vehicle->name }}</td>
-            <td data-column="Part">{{ $item->show_part->name }}</td>
-            <td data-column="Kualitas">{{ $item->show_quality->name }}</td>
-            <td data-column="deskripsi">{{ $item->description }}</td>
-            <td data-column="dibuat oleh">{{ $item->createdBy }}</td>
-            <td data-column="Tanggal"> {{ date('F j, Y', strtotime($item->tanggal)) }}</td>
+            <td data-column="Part">{{ $item->show_part->name ?? 'Oli' }}</td>
+            <td data-column="Kilometer">{{ $item->number ? number_format($item->number) . ' Kilometer' : '-' }}</td>
+            <td data-column="deskripsi">{{ $item->description ?? '-' }}</td>
+            <td data-column="diinput oleh">{{ $item->createdBy }}</td>
+            <td data-column="Tanggal"> {{ date('j F, Y', strtotime($item->tanggal)) }}</td>
+            <td data-column="status service">{{ $item->status_service }}</td>
             </td>
         </tr>
         @endforeach

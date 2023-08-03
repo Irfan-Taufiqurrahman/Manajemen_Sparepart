@@ -196,7 +196,7 @@ use Carbon\Carbon;
                                     <td class="border px-4 py-2 ">{{ $item->show_vehicle->name }}</td>
                                     <td class="border px-4 py-2 ">{{ $item->show_part->name }}</td>
                                     <td class="border px-4 py-2 ">{{ $item->show_quality->name }}</td>
-                                    <td class="border px-4 py-2 ">{{ $item->description }}</td>
+                                    <td class="border px-4 py-2 ">{{ $item->description ?? '-' }}</td>
                                     <td class="border px-4 py-2">{{ $item->createdBy }}</td>
                                     <td class="border px-4 py-2">{{ Carbon::parse($item->tanggal)->format('d F Y') }}
                                     </td>

@@ -8,7 +8,13 @@ use Carbon\Carbon;
     <form action="{{ route('view.pdf') }}" method="post" target="__blank">
         @csrf
         <div>
-            <button class="inline-block rounded-full border-2 border-primary-100 px-6 pb-[6px] pt-2 text-xs font-medium uppercase leading-normal text-primary-700 transition duration-150 ease-in-out hover:border-primary-accent-100 hover:bg-neutral-500 hover:bg-opacity-10 focus:border-primary-accent-100 focus:outline-none focus:ring-0 active:border-primary-accent-200 dark:text-primary-100 dark:hover:bg-neutral-100 dark:hover:bg-opacity-10" data-te-ripple-init>
+            <label for="from">From:</label>
+            <input type="date" name="from" required>
+
+            <label for="to">To:</label>
+            <input type="date" name="to" required>
+
+            <button type="submit" class="inline-block rounded-full border-2 border-primary-100 px-6 pb-[6px] pt-2 text-xs font-medium uppercase leading-normal text-primary-700 transition duration-150 ease-in-out hover:border-primary-accent-100 hover:bg-neutral-500 hover:bg-opacity-10 focus:border-primary-accent-100 focus:outline-none focus:ring-0 active:border-primary-accent-200 dark:text-primary-100 dark:hover:bg-neutral-100 dark:hover:bg-opacity-10" data-te-ripple-init>
                 <div class="flex justify-between content-center">
                     <div class="pr-2">
                         <svg xlmns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
@@ -23,6 +29,7 @@ use Carbon\Carbon;
             </button>
         </div>
     </form>
+
     <div class="table-responsive">
         <!-- Add a new row for the month filter -->
         <div class="mb-4 grid grid-cols-2 md:grid-cols-3 xl:grid-cols-6 gap-2 mt-4">

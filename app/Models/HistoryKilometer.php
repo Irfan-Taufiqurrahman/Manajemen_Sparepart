@@ -12,7 +12,9 @@ class HistoryKilometer extends Model
     protected $fillable = [
         'number',
         'vehicle_id',
+        'part_id',
         'image',
+        'file_service_evidence',
     ];
 
     public function list_vehicle()
@@ -23,5 +25,15 @@ class HistoryKilometer extends Model
     public function show_vehicle()
     {
         return $this->belongsTo(Vehicle::class, 'vehicle_id');
+    }
+
+    public function listPart()
+    {
+        return $this->belongsTo(Part::class);
+    }
+
+    public function show_part()
+    {
+        return $this->belongsTo(Part::class, 'part_id');
     }
 }

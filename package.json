@@ -17,6 +17,8 @@
     },
     "dependencies": {
         "@preline/overlay": "^1.4.0",
-        "datatables.net": "^1.13.5"
+        "datatables.net": "^1.13.5",
+        "flowbite": "^1.8.1",
+        "flowbite-datepicker": "^1.2.2"
     }
 }
